@@ -1,6 +1,6 @@
 class TodosController < ApplicationController
   #only 以下のメソッドの前に before action として set_todo メソッドへ
-  before_action :set_todo, only: [:show, :edit, :update, :destroy]
+  before_action :set_todo, only: [:show, :edit, :update, :status, :destroy]
 
   # GET /todos
   # GET /todos.json
@@ -45,6 +45,7 @@ class TodosController < ApplicationController
 
   # PATCH/PUT /todos/1
   # PATCH/PUT /todos/1.json
+  #バリデーションに失敗したら表す
   def update
     respond_to do |format|
       if @todo.update(todo_params)
@@ -66,6 +67,12 @@ class TodosController < ApplicationController
       format.json { head :no_content }
     end
   end
+#リダイレクトし、notice 以下のメッセージを返す
+  def status
+    @todo.status = params[:status]
+    @todo.save!
+    redirect_to root_url, notice: "「#{@todo.title}」が完了しました"
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -76,6 +83,6 @@ class TodosController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     #permit()内に扱いが許可されてるパラメータを記述
     def todo_params
-      params.require(:todo).permit(:title, :body, :status)
+      params.require(:todo).permit(:title, :body, :status, :priority)
     end
 end
