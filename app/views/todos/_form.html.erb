@@ -16,14 +16,21 @@
     <%= form.text_field :title %>
   </div>
 
+  <%# formタグでテキスト入力 %>
   <div class="field">
     <%= form.label :body %>
     <%= form.text_area :body %>
   </div>
 
+  <%# formタグで数字選択 %>
   <div class="field">
     <%= form.label :status %>
     <%= form.number_field :status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :priority %>
+    <%= form.number_field :priority %>
   </div>
 
   <div class="actions">

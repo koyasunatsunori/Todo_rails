@@ -11,6 +11,15 @@
 
   <body>
   <h1>My application</h1>
+
+
+  <div id= "wrapper">
+    <header>
+      <%= link_to '新しいTodo', new_todo_path %>
+    </header>
+
     <%= yield %>
+  </div>
+
   </body>
 </html>
